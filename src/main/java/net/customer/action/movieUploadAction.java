@@ -43,7 +43,7 @@ public class movieUploadAction implements Action {
 			System.out.println(multi.getParameter("director"));
 			System.out.println(multi.getParameter("info"));
 			System.out.println(Integer.parseInt(multi.getParameter("price")));
-System.out.println(multi.getFilesystemName("fileName"));
+			System.out.println(multi.getFilesystemName("fileName"));
 			
 			mlbean.setName(multi.getParameter("name"));
 			mlbean.setCategory(multi.getParameter("category"));

@@ -223,7 +223,7 @@
             
 <div class="header_content">
     <div class="contents">
-        <h1 onclick=""><a href="/"><img src="https://img.cgv.co.kr/R2014/images/common/logo/logoRed.png" alt="CGV" /></a><span>CULTUREPLEX</span></h1>
+        <h1 onclick=""><a href="LoginMain.cu"><img src="https://img.cgv.co.kr/R2014/images/common/logo/logoRed.png" alt="CGV" /></a><span>CULTUREPLEX</span></h1>
         <ul class="memberInfo_wrap">
             <!-- Advertisement -->
             
@@ -240,7 +240,7 @@
 				<li><span><a href="Admin.cu">관리자 페이지</a></span></li>
 			  <% }%>
             
-            <li><a href="/user/mycgv/"><img src="https://img.cgv.co.kr/R2014/images/common/ico/loginMember.png" alt="MY CGV" /><span>MY CGV</span></a></li>
+            <li><a href="Main.cu"><img src="https://img.cgv.co.kr/R2014/images/common/ico/loginMember.png" alt="MY CGV" /><span>로그아웃</span></a></li>
             <li><a href="/support/default.aspx"><img src="https://img.cgv.co.kr/R2014/images/common/ico/loginCustomer.png" alt="고객센터" /><span>고객센터</span></a></li>
         </ul>
     </div>
