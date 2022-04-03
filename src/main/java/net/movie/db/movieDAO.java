@@ -9,46 +9,42 @@ import java.util.List;
 import java.util.Vector;
 import net.movie.db.movieListBean;
 
-
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 public class movieDAO {
-	
-	
+
 	Connection con;
 	PreparedStatement pstmt;
 	ResultSet rs;
-	
+
 	public movieDAO() {
 		// 커넥션 풀을 DAO 생성자에 삽입
-		try{
+		try {
 			Context init = new InitialContext();
-	  		DataSource ds = (DataSource) init.lookup("java:comp/env/jdbc/OracleDB");
-	  		con = ds.getConnection();
-		}catch(Exception ex){
+			DataSource ds = (DataSource) init.lookup("java:comp/env/jdbc/OracleDB");
+			con = ds.getConnection();
+		} catch (Exception ex) {
 			System.out.println("DB 연결 실패 : " + ex);
 			return;
 		}
 	}
 
-	
-	
 	public List<movieListBean> getSelectmovie() {
-		
+
 		String sql = "select * from movie order by no";
-		
+
 		List<movieListBean> list = new ArrayList<movieListBean>();
-		
+
 		try {
-			
+
 			pstmt = con.prepareStatement(sql);
-			rs= pstmt.executeQuery();
-			
-			while(rs.next()) {
-				
+			rs = pstmt.executeQuery();
+			System.out.println("여기는다오");
+			while (rs.next()) {
+
 				movieListBean bean = new movieListBean();
 				bean.setNo(rs.getInt("no"));
 				bean.setName(rs.getString("name"));
@@ -57,48 +53,52 @@ public class movieDAO {
 				bean.setDirector(rs.getString("director"));
 				bean.setImg(rs.getString("img"));
 				bean.setInfo(rs.getString("info"));
-				
+
 				list.add(bean);
-				
+				System.out.println(list);
 			}
-			
+
+			return list;
+
+		} catch (Exception ex) {
+			System.out.println("getMovieList ??? : " + ex);
+		} finally {
+			if (rs != null)
+				try {
+					rs.close();
+				} catch (SQLException ex) {
+				}
+			if (pstmt != null)
+				try {
+					pstmt.close();
+				} catch (SQLException ex) {
+				}
+
+		}
+
 		return list;
-		
-	}catch(Exception ex) {
-		System.out.println("getMovieList ??? : " + ex);
-	}finally {
-		if(rs!=null) try{rs.close();}catch(SQLException ex){}
-		if(pstmt!=null) try{pstmt.close();}catch(SQLException ex){}
-		
 	}
-	
-	return list;
-	}
-	
-	
+
 	// 카테고리별 영화 리스트를 저장하는 메소드
-	public List<movieListBean> getCategoryMovie(String cate){
-		
-		
+	public List<movieListBean> getCategoryMovie(String cate) {
+
 		List<movieListBean> list = new ArrayList<movieListBean>();
-		//데이터를 저장할 빈클래스 선언
+		// 데이터를 저장할 빈클래스 선언
 		movieListBean bean = null;
-		
-		try{
-			pstmt = con.prepareStatement(
-					"select * from movie where category = ?order by no");
-			
-			
-			//? 물음표값
+
+		try {
+			pstmt = con.prepareStatement("select * from movie where category = ?order by no");
+
+			// ? 물음표값
 			pstmt.setString(1, cate);
-			
-			//결과를 리턴
-			rs= pstmt.executeQuery();
-			
-			//반복문을 돌면서 데이터를 저장
-			
-			while(rs.next()) {
-				//데이터를 저장할 빈클래스 생성
+
+			// 결과를 리턴
+			rs = pstmt.executeQuery();
+
+			// 반복문을 돌면서 데이터를 저장
+
+			while (rs.next()) {
+				// 데이터를 저장할 빈클래스 생성
 				bean = new movieListBean();
 				bean.setNo(rs.getInt("no"));
 				bean.setName(rs.getString("name"));
@@ -107,39 +107,45 @@ public class movieDAO {
 				bean.setDirector(rs.getString("director"));
 				bean.setImg(rs.getString("img"));
 				bean.setInfo(rs.getString("info"));
-				
+
 				list.add(bean);
-				
+
 			}
 			rs.close();
-		}catch(Exception ex){
+		} catch (Exception ex) {
 			System.out.println("getCategoryMovie 에러 : " + ex);
-		}finally{
-			if(rs!=null)try{rs.close();}catch(SQLException ex){}
-			if(pstmt !=null)try{pstmt.close();}catch(SQLException ex){}
+		} finally {
+			if (rs != null)
+				try {
+					rs.close();
+				} catch (SQLException ex) {
+				}
+			if (pstmt != null)
+				try {
+					pstmt.close();
+				} catch (SQLException ex) {
+				}
 		}
 		return list;
 	}
-		
-	//모든 차량을 검색하는 메소드
-	public List<movieListBean> getAllMovie(){
-		
-		
+
+	// 모든 무비을 검색하는 메소드
+	public List<movieListBean> getAllMovie() {
+
 		List<movieListBean> list = new ArrayList<movieListBean>();
-		//데이터를 저장할 빈클래스 선언
+		// 데이터를 저장할 빈클래스 선언
 		movieListBean bean = null;
-		
-		try{
-			pstmt = con.prepareStatement(
-					"select * from movie order by no");
-			
-			//결과를 리턴
-			rs= pstmt.executeQuery();
-			
-			//반복문을 돌면서 데이터를 저장
-			
-			while(rs.next()) {
-				//데이터를 저장할 빈클래스 생성
+
+		try {
+			pstmt = con.prepareStatement("select * from movie order by no");
+
+			// 결과를 리턴
+			rs = pstmt.executeQuery();
+
+			// 반복문을 돌면서 데이터를 저장
+
+			while (rs.next()) {
+				// 데이터를 저장할 빈클래스 생성
 				bean = new movieListBean();
 				bean.setNo(rs.getInt("no"));
 				bean.setName(rs.getString("name"));
@@ -148,45 +154,48 @@ public class movieDAO {
 				bean.setDirector(rs.getString("director"));
 				bean.setImg(rs.getString("img"));
 				bean.setInfo(rs.getString("info"));
-				
+
 				list.add(bean);
-				
+
 			}
-			//rs.close();
-		}catch(Exception ex){
+			// rs.close();
+		} catch (Exception ex) {
 			System.out.println("getAllMovie 에러 : " + ex);
-		}finally{
-			if(rs!=null)try{rs.close();}catch(SQLException ex){}
-			if(pstmt !=null)try{pstmt.close();}catch(SQLException ex){}
+		} finally {
+			if (rs != null)
+				try {
+					rs.close();
+				} catch (SQLException ex) {
+				}
+			if (pstmt != null)
+				try {
+					pstmt.close();
+				} catch (SQLException ex) {
+				}
 		}
 		return list;
-		
-		
-		
-		
+
 	}
-		
-		
-		
-	//하나의 영화 정보를 리턴하는 메소드
+
+	// 하나의 영화 정보를 리턴하는 메소드
 	public movieListBean getOneMovie(int no) {
-		
-		//리턴타입 선언
+
+		// 리턴타입 선언
 		movieListBean bean = new movieListBean();
-		
+
 		try {
 			pstmt = con.prepareStatement("select * from movie where no = ? order by no");
-			
-			//물음표 값
+
+			// 물음표 값
 			pstmt.setInt(1, no);
-			
-			//결과를 리턴
-			rs= pstmt.executeQuery();
-			
-			//반복문을 돌면서 데이터를 저장
-			
-			if(rs.next()) {
-				
+
+			// 결과를 리턴
+			rs = pstmt.executeQuery();
+
+			// 반복문을 돌면서 데이터를 저장
+
+			if (rs.next()) {
+
 				bean.setNo(rs.getInt("no"));
 				bean.setName(rs.getString("name"));
 				bean.setCategory(rs.getString("category"));
@@ -194,43 +203,38 @@ public class movieDAO {
 				bean.setDirector(rs.getString("director"));
 				bean.setImg(rs.getString("img"));
 				bean.setInfo(rs.getString("info"));
-				
-			
-				
+
 			}
 			rs.close();
-			
-			
-		}catch(Exception ex){
+			return bean;
+
+		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-		
-		return bean;
-		
-		}
 
+		return null;
 
+	}
 
 	public boolean movieupload(movieListBean mlbean) {
-		int num =0;
-		String sql="insert into movie values(?,?,?,?,?,?,?)";
+		int num = 0;
+		String sql = "insert into movie values(?,?,?,?,?,?,?)";
 		System.out.println("성공33");
 		try {
-			pstmt=con.prepareStatement("select max(no) from movie");
+			pstmt = con.prepareStatement("select max(no) from movie");
 			rs = pstmt.executeQuery();
-			
-			if(rs.next())
-				num =rs.getInt(1)+1;
+
+			if (rs.next())
+				num = rs.getInt(1) + 1;
 			else
-				num=1;
-			
-			
+				num = 1;
+
 			System.out.println(num);
 			System.out.println(mlbean.getImg());
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			pstmt.setString(2, mlbean.getName());
-			pstmt.setString(3,mlbean.getCategory());
+			pstmt.setString(3, mlbean.getCategory());
 			pstmt.setInt(4, mlbean.getPrice());
 			pstmt.setString(5, mlbean.getDirector());
 			pstmt.setString(6, mlbean.getImg());
@@ -238,65 +242,28 @@ public class movieDAO {
 			System.out.println("성공55");
 			pstmt.execute();
 			return true;
-			
-			
-		}catch(Exception ex){
-			System.out.println("movieInsert 에러 : "+ex);
-			
-		}finally{
-			if(rs!=null) try{rs.close();}catch(SQLException ex){}
-			if(pstmt!=null) try{pstmt.close();}catch(SQLException ex){}
+
+		} catch (Exception ex) {
+			System.out.println("movieInsert 에러 : " + ex);
+
+		} finally {
+			if (rs != null)
+				try {
+					rs.close();
+				} catch (SQLException ex) {
+				}
+			if (pstmt != null)
+				try {
+					pstmt.close();
+				} catch (SQLException ex) {
+				}
 			System.out.println("성공66");
 		}
-		return false;	
+		return false;
 	}
 
+}
 
-
-	
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-	}
-	
-	
-		
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 //	//최신순 5개의 영화를 리턴하는 메소드
 //	public Vector<movieListBean> getSelectMovie(){
 //		
@@ -334,5 +301,3 @@ public class movieDAO {
 //		
 //		return v;
 //  }
-	
-

@@ -62,13 +62,21 @@
 
 
 <%
-
+	
 	int no = Integer.parseInt(request.getParameter("no"));
 	//	수량
 	int qty = Integer.parseInt(request.getParameter("qty"));
 
 	//이미지
 	String img = request.getParameter("img");
+	
+	request.setCharacterEncoding("UTF-8");
+	String id = (String)session.getAttribute("id");
+
+	if(id==""||id==null){
+		response.sendRedirect("CustomerLoginForm.cu");
+		return;
+	}
 
 %> 
 

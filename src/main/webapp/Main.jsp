@@ -425,8 +425,8 @@
             <li><a href="./CustomerJoinForm.cu"><img src="https://img.cgv.co.kr/R2014/images/common/ico/loginJoin.png" alt="회원가입" /><span>회원가입</span></a></li>
             
             
-            <li><a href="/user/mycgv/"><img src="https://img.cgv.co.kr/R2014/images/common/ico/loginMember.png" alt="MY CGV" /><span>MY CGV</span></a></li>
-            <li><a href="/"><img src="https://img.cgv.co.kr/R2014/images/common/ico/loginCustomer.png" alt="고객센터" /><span>고객센터</span></a></li>
+            <li><a href="Main.cu"><img src="https://img.cgv.co.kr/R2014/images/common/ico/loginMember.png" alt="MY CGV" /><span>MY CGV</span></a></li>
+            <li><a href="Main.cu"><img src="https://img.cgv.co.kr/R2014/images/common/ico/loginCustomer.png" alt="고객센터" /><span>고객센터</span></a></li>
         </ul>
     </div>
 </div>
@@ -638,8 +638,8 @@
             <li>
                 <h2><a href="/movies/?lt=1&ft=0">영화</a></h2>
                 <dl class="nav_overMenu">
-                    <dt><h2><a href="/movies/?lt=1&ft=0" tabindex="-1">영화</a></h2></dt>
-                    <dd><h3><a href="/movies/?lt=1&ft=0">무비차트</a></h3></dd>
+                    <dt><h2><a href="./MovieChartAction.cu" tabindex="-1">영화</a></h2></dt>
+                    <dd><h3><a href="./MovieChartAction.cu">무비차트</a></h3></dd>
                     <dd><h3><a href="/arthouse/">아트하우스</a></h3></dd>
                     <dd><h3><a href="/culture-event/event/detailViewUnited.aspx?seq=30717">ICECON</a></h3></dd>
                 </dl>

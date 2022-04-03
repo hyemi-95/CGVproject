@@ -665,8 +665,8 @@
             <li>
                 <h2><a href="./MovieChart.cu">영화</a></h2>
                 <dl class="nav_overMenu">
-                    <dt><h2><a href="./MovieChart.cu" tabindex="-1">영화</a></h2></dt>
-                    <dd><h3><a href="./MovieChart.cu">무비차트</a></h3></dd>
+                    <dt><h2><a href="./MovieChartAction.cu" tabindex="-1">영화</a></h2></dt>
+                    <dd><h3><a href="./MovieChartAction.cu">무비차트</a></h3></dd>
                     <dd><h3><a href="/arthouse/">아트하우스</a></h3></dd>
                     <dd><h3><a href="/culture-event/event/detailViewUnited.aspx?seq=30717">ICECON</a></h3></dd>
                 </dl>

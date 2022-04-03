@@ -19,7 +19,7 @@ public class MovieAllListAction implements Action {
 		
 		movieDAO mdao = new movieDAO(); // DAO 쿼리문을 날릴 객체 생성
 		movieListBean bean = new movieListBean(); // 빈즈 클래스에 데이터를 삽입할 객체 생성
-		List<movieListBean> list = new ArrayList();
+		List<movieListBean> list = new ArrayList<movieListBean>();
 		
 		
 	
@@ -32,7 +32,7 @@ public class MovieAllListAction implements Action {
 		return null;
 	}
 		System.out.println("bean값 넘어옴");
-		request.setAttribute("bean",bean);
+		request.setAttribute("list",list);
 		
 		ActionForward forward= new ActionForward();
 		forward.setRedirect(false);

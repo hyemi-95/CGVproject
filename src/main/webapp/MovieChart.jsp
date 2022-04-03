@@ -223,7 +223,11 @@
             
 <div class="header_content">
     <div class="contents">
+    	<%if(id.equals("GUEST")){ %>
+    	 <h1 onclick=""><a href="Main.cu"><img src="https://img.cgv.co.kr/R2014/images/common/logo/logoRed.png" alt="CGV" /></a><span>CULTUREPLEX</span></h1>
+    	 <%}else{ %>
         <h1 onclick=""><a href="LoginMain.cu"><img src="https://img.cgv.co.kr/R2014/images/common/logo/logoRed.png" alt="CGV" /></a><span>CULTUREPLEX</span></h1>
+        <%} %>
         <ul class="memberInfo_wrap">
             <!-- Advertisement -->
             
@@ -234,13 +238,18 @@
 			</div>
             
             <!-- /Advertisement -->
-
+            
              <li><span><%=id %>님 반갑습니다.&nbsp;</span></li>
+             
              <%if(id.equals("Admin")){ %>
 				<li><span><a href="Admin.cu">관리자 페이지</a></span></li>
 			  <% }%>
-            
-            <li><a href="Main.cu"><img src="https://img.cgv.co.kr/R2014/images/common/ico/loginMember.png" alt="MY CGV" /><span>로그아웃</span></a></li>
+			 <%if(!id.equals("GUEST")){ %>
+            	<li><a href="Main.cu"><img src="https://img.cgv.co.kr/R2014/images/common/ico/loginMember.png" alt="MY CGV" /><span>로그아웃</span></a></li>
+             <%}else{%>
+             <li><a href="./CustomerLoginForm.cu"><img src="https://img.cgv.co.kr/R2014/images/common/ico/loginPassword.png" alt="로그인" /><span>로그인</span></a></li>
+            <li><a href="./CustomerJoinForm.cu"><img src="https://img.cgv.co.kr/R2014/images/common/ico/loginJoin.png" alt="회원가입" /><span>회원가입</span></a></li>
+             <%} %>
             <li><a href="/support/default.aspx"><img src="https://img.cgv.co.kr/R2014/images/common/ico/loginCustomer.png" alt="고객센터" /><span>고객센터</span></a></li>
         </ul>
     </div>
@@ -638,16 +647,16 @@
             <!-- 데이터 베이스에 연결하여 순서대로 영화를 뿌려주는 데이터를 가져옴 -->
 <%
 
-	movieDAO mdao = new movieDAO();
-	// LIST를 이용하여 movie 를 저장
-	List<movieListBean> list = mdao.getSelectmovie();
 
+
+	List list = (List)request.getAttribute("list");
 %>
+
    
             <ol>
 <%
 	for(int i=0; i < list.size(); i++){ // i가 list.size 메소드 까지 가라. i를 1씩 증가 해라 
-		movieListBean bean = list.get(i); // movieListBean 타입으로 받아서 list를 뽑아 내야 함
+		movieListBean bean = (movieListBean)list.get(i); // movieListBean 타입으로 받아서 list를 뽑아 내야 함
 		//
 %>
           <!--이미지를 눌렀을떄 상세보기로 넘어가기. 이때 영화에 대해서  no 만 알면 그 정보를 다 얻어올수 있게 하기 위해서 

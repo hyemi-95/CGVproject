@@ -50,8 +50,16 @@ public class CustomerFrontController extends HttpServlet implements Servlet {
 			forward.setRedirect(false);
 			forward.setPath("./Main.jsp");
 		}
+		else if(command.equals("/MovieChartAction.cu")) { 
+			action = new movieChartAction(); System.out.println("무비차트액션탔다");
+			try {
+				forward = action.execute(request, response);
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
 		
-		else if(command.equals("/MovieChart.cu")) { 
+		else if(command.equals("/MovieChart.cu")) { System.out.println("무비차트페이지 탐");
 			forward = new ActionForward();
 
 			forward.setRedirect(false);
@@ -64,7 +72,7 @@ public class CustomerFrontController extends HttpServlet implements Servlet {
 			forward.setPath("./OptionSelect.jsp");
 		}//관리자 로그인시 관리자페이지 넘어가는 ..
 		else if(command.equals("/Admin.cu")) { 
-			forward = new ActionForward();System.out.println("관리자페이지 탔다");
+			forward = new ActionForward(); System.out.println("관리자페이지 탔다");
 			forward.setRedirect(false);
 			forward.setPath("./Admin.jsp");
 		}//관리자페이지에서 무비차트업로드
